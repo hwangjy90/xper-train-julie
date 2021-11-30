@@ -2,17 +2,21 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="unit-test"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/xper"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/home/justin/jkcode/ConnorLab/xper-train/xper/lib/spring/spring-core.jar"/>
 	<classpathentry kind="lib" path="/xper/lib/xstream-1.2.1.jar"/>
-	<classpathentry kind="lib" path="/home/justin/jkcode/ConnorLab/xper-train/xper/lib/spring/spring-javaconfig.jar" sourcepath="/media/sda5/Source/spring-javaconfig"/>
-	<classpathentry kind="lib" path="/home/justin/jkcode/ConnorLab/xper-train/xper/lib/spring/spring-beans.jar"/>
-	<classpathentry kind="lib" path="/home/justin/jkcode/ConnorLab/xper-train/xper/lib/spring/spring-context.jar"/>
 	<classpathentry kind="lib" path="/xper/lib/junit-3.8.1.jar"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/xper"/>
+	<classpathentry kind="lib" path="/xper/lib/spring/com.springsource.javax.annotation-1.0.0.jar"/>
+	<classpathentry kind="lib" path="/xper/lib/spring/spring-beans.jar"/>
+	<classpathentry kind="lib" path="/xper/lib/spring/spring-context.jar"/>
+	<classpathentry kind="lib" path="/xper/lib/spring/spring-context-support.jar"/>
+	<classpathentry kind="lib" path="/xper/lib/spring/spring-core.jar"/>
+	<classpathentry kind="lib" path="/xper/lib/spring/spring-javaconfig.jar"/>
+	<classpathentry kind="lib" path="/xper/lib/spring/spring-jdbc.jar"/>
+	<classpathentry kind="lib" path="/xper/lib/spring/spring-tx.jar"/>
 	<classpathentry kind="output" path="class"/>
 </classpath>
