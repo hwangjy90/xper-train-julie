@@ -23,6 +23,7 @@ public class Circle implements Drawable {
 	/**
 	 * @param context ignored.
 	 */
+	
 	public void draw(Context context) {
 		GL11.glInterleavedArrays(GL11.GL_V3F, 0, array);
 		if (solid) {
@@ -32,10 +33,7 @@ public class Circle implements Drawable {
 		}
 	}
 
-	public double getRadius() {
-		return radius;
-	}
-	
+
 	void initArray() {
 		for (int i = 0; i < STEPS; i ++) {
 			double angle = i * 2 * Math.PI / STEPS;
@@ -52,7 +50,11 @@ public class Circle implements Drawable {
 		
 		initArray();
 	}
-
+	
+	public double getRadius() {
+		return radius;
+	}
+	
 	public boolean isSolid() {
 		return solid;
 	}
@@ -60,4 +62,5 @@ public class Circle implements Drawable {
 	public void setSolid(boolean solid) {
 		this.solid = solid;
 	}
+	
 }

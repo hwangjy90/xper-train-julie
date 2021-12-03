@@ -48,5 +48,12 @@ public class RectangleSpec {
 	public void setHeight(double height) {
 		this.height = height;
 	}
+	
+	public boolean isSolid() {
+		return solid;
+	}
+	public void setSolid(boolean solid) {
+		this.solid = solid;
+	}
 
 }

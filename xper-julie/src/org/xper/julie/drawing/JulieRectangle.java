@@ -48,8 +48,9 @@ public class JulieRectangle extends Rectangle{
 
 	public void setSpec(String s) {
 		spec = RectangleSpec.fromXml(s);
-		spec
-		
+		setWidth(spec.getWidth());
+		setHeight(spec.getHeight());
+		setSolid(spec.isSolid());
 	}
 
 	public static void initGL() {

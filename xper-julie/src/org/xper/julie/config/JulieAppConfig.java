@@ -21,6 +21,8 @@ import org.xper.drawing.object.BlankScreen;
 import org.xper.experiment.Experiment;
 import org.xper.experiment.ExperimentRunner;
 import org.xper.juice.mock.NullDynamicJuice;
+import org.xper.julie.classic.CircleScene;
+import org.xper.julie.classic.CircleSpecGenerator;
 import org.xper.julie.classic.JulieJuiceController;
 import org.xper.julie.experiment.JulieTrialExperiment;
 import org.xper.julie.experiment.JulieTrialExperimentState;
@@ -48,12 +50,13 @@ public class JulieAppConfig {
 		gen.setGenerator(generator());
 		return gen;
 	}
-	
+	/*
 	@Bean
 	public RectangleSpecGenerator generator() {
 		RectangleSpecGenerator gen = new RectangleSpecGenerator();
 		return gen;
 	}
+	
 	
 	@Bean
 	public TaskScene taskScene() {
@@ -65,7 +68,23 @@ public class JulieAppConfig {
 		return scene;
 	}
 	
-
+	*/
+	@Bean
+	public CircleSpecGenerator generator() {
+		CircleSpecGenerator gen = new CircleSpecGenerator();
+		return gen;
+	}
+	
+	
+	@Bean
+	public TaskScene taskScene() {
+		CircleScene scene = new CircleScene();
+		scene.setRenderer(classicConfig.experimentGLRenderer());
+		scene.setFixation(classicConfig.experimentFixationPoint());
+		scene.setMarker(classicConfig.screenMarker());
+		scene.setBlankScreen(new BlankScreen());
+		return scene;
+	}
 	@Bean
 	public ExperimentRunner experimentRunner () {
 		ExperimentRunner runner = new ExperimentRunner();

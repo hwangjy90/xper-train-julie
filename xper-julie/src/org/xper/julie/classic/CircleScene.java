@@ -3,12 +3,13 @@ package org.xper.julie.classic;
 import org.xper.drawing.AbstractTaskScene;
 import org.xper.drawing.Context;
 import org.xper.experiment.ExperimentTask;
-import org.xper.julie.drawing.JulieRectangle;
+import org.xper.julie.drawing.JulieCircle;
 import org.xper.rfplot.RFPlotGaborObject;
 
-public class RectangleScene extends AbstractTaskScene{
+public class CircleScene extends AbstractTaskScene{
 	
-	JulieRectangle obj = new JulieRectangle();
+	JulieCircle obj = new JulieCircle();
+	
 
 	public void initGL(int w, int h) {
 		super.initGL(w, h);
@@ -22,5 +23,6 @@ public class RectangleScene extends AbstractTaskScene{
 	public void drawStimulus(Context context) {
 		obj.draw(context);
 	}
+
 
 }
