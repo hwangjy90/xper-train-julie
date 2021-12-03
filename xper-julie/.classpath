@@ -2,6 +2,7 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="app"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/xper"/>
 	<classpathentry kind="lib" path="/xper/lib/spring/com.springsource.javax.annotation-1.0.0.jar"/>
 	<classpathentry kind="lib" path="/xper/lib/spring/spring-beans.jar"/>
@@ -11,5 +12,15 @@
 	<classpathentry kind="lib" path="/xper/lib/spring/spring-javaconfig.jar"/>
 	<classpathentry kind="lib" path="/xper/lib/spring/spring-jdbc.jar"/>
 	<classpathentry kind="lib" path="/xper/lib/spring/spring-tx.jar"/>
+	<classpathentry kind="lib" path="/xper/lib/xstream-1.2.1.jar"/>
+	<classpathentry kind="lib" path="/xper/lib/lwjgl/AppleJavaExtensions.jar"/>
+	<classpathentry kind="lib" path="/xper/lib/lwjgl/asm-debug-all.jar"/>
+	<classpathentry kind="lib" path="/xper/lib/lwjgl/jinput.jar"/>
+	<classpathentry kind="lib" path="/xper/lib/lwjgl/lwjgl_test.jar"/>
+	<classpathentry kind="lib" path="/xper/lib/lwjgl/lwjgl_util_applet.jar"/>
+	<classpathentry kind="lib" path="/xper/lib/lwjgl/lwjgl_util.jar"/>
+	<classpathentry kind="lib" path="/xper/lib/lwjgl/lwjgl.jar"/>
+	<classpathentry kind="lib" path="/xper/lib/lwjgl/lwjgl-debug.jar"/>
+	<classpathentry kind="lib" path="/xper/lib/lwjgl/lzma.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

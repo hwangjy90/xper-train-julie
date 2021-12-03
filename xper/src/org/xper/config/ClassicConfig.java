@@ -1051,6 +1051,7 @@ public class ClassicConfig {
 		return Integer.parseInt(baseConfig.systemVariableContainer().get("xper_slide_length", 0));
 	}
 
+	
 	@Bean(scope = DefaultScopes.PROTOTYPE)
 	public Integer xperInterSlideInterval() {
 		return Integer.parseInt(baseConfig.systemVariableContainer().get("xper_inter_slide_interval", 0));

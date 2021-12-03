@@ -1,52 +1,47 @@
-package org.xper.classic;
+package org.xper.julie.experiment;
 
-import org.apache.log4j.Logger;
+import java.util.logging.Logger;
+
 import org.xper.Dependency;
+import org.xper.classic.SlideRunner;
+import org.xper.classic.SlideTrialExperiment;
+import org.xper.classic.TrialDrawingController;
+import org.xper.classic.TrialRunner;
 import org.xper.classic.vo.SlideTrialExperimentState;
 import org.xper.classic.vo.TrialContext;
 import org.xper.classic.vo.TrialResult;
 import org.xper.experiment.Experiment;
 import org.xper.experiment.ExperimentTask;
 import org.xper.experiment.TaskDoneCache;
+import org.xper.julie.util.JulieTrialExperimentUtil;
 import org.xper.time.TimeUtil;
 import org.xper.util.ThreadHelper;
 import org.xper.util.TrialExperimentUtil;
 import org.xper.util.XmlUtil;
 
-/**
- * Format of StimSpec:
- * 
- * <StimSpec animation="true"> ... </StimSpec>
- * 
- * If attribute animation is false or missing, the stimulus is treated as a
- * static slide.
- * 
- * @author wang
- * 
- */
-public class SlideTrialExperiment implements Experiment {
-	static Logger logger = Logger.getLogger(SlideTrialExperiment.class);
+public class JulieTrialExperiment implements Experiment{
+	
 
-	protected ThreadHelper threadHelper = new ThreadHelper("SlideTrialExperiment", this);
+	protected ThreadHelper threadHelper = new ThreadHelper("JulieTrialExperiment", this);
 
 	@Dependency
-	protected
-	SlideTrialExperimentState stateObject;
-
+	JulieTrialExperimentState stateObject;
+	
 	public boolean isRunning() {
 		return threadHelper.isRunning();
 	}
 
+	
 	public void start() {
 		threadHelper.start();
 	}
-
+	
 	public void run() {
-		TrialExperimentUtil.run(stateObject, threadHelper, new TrialRunner() {
+		JulieTrialExperimentUtil.run(this.stateObject, threadHelper, new TrialRunner() {
 			public TrialResult runTrial() {
 				try {
 					// get a task
-					TrialExperimentUtil.getNextTask(stateObject);
+					JulieTrialExperimentUtil.getNextTask(stateObject);
 
 					if (stateObject.getCurrentTask() == null && !stateObject.isDoEmptyTask()) {
 						try {
@@ -59,10 +54,10 @@ public class SlideTrialExperiment implements Experiment {
 					// initialize trial context
 					stateObject.setCurrentContext(new TrialContext());
 					stateObject.getCurrentContext().setCurrentTask(stateObject.getCurrentTask());
-					TrialExperimentUtil.checkCurrentTaskAnimation(stateObject);
+					JulieTrialExperimentUtil.checkCurrentTaskAnimation(stateObject);
 
 					// run trial
-					return TrialExperimentUtil.runTrial(stateObject, threadHelper, new SlideRunner() {
+					return JulieTrialExperimentUtil.runTrial(stateObject, threadHelper, new SlideRunner() {
 
 						public TrialResult runSlide() {
 							int slidePerTrial = stateObject.getSlidePerTrial();
@@ -76,7 +71,7 @@ public class SlideTrialExperiment implements Experiment {
 								for (int i = 0; i < slidePerTrial; i++) {
 									
 									// draw the slide
-									TrialResult result = TrialExperimentUtil.doSlide(i, stateObject);
+									TrialResult result = JulieTrialExperimentUtil.doSlide(i, stateObject);
 									if (result != TrialResult.SLIDE_OK) {
 										return result;
 									}
@@ -91,7 +86,7 @@ public class SlideTrialExperiment implements Experiment {
 
 									// prepare next task
 									if (i < slidePerTrial - 1) {
-										TrialExperimentUtil.getNextTask(stateObject);
+										JulieTrialExperimentUtil.getNextTask(stateObject);
 										currentTask = stateObject.getCurrentTask();
 										if (currentTask == null && !stateObject.isDoEmptyTask()) {
 											try {
@@ -109,7 +104,7 @@ public class SlideTrialExperiment implements Experiment {
 												currentContext);
 									}
 									// inter slide interval
-									result = TrialExperimentUtil.waitInterSlideInterval(stateObject, threadHelper);
+									result = JulieTrialExperimentUtil.waitInterSlideInterval(stateObject, threadHelper);
 									if (result != TrialResult.SLIDE_OK) {
 										return result;
 									}
@@ -118,9 +113,9 @@ public class SlideTrialExperiment implements Experiment {
 								// end of SlideRunner.runSlide
 							} finally {
 								try {
-									TrialExperimentUtil.cleanupTask(stateObject);
+									JulieTrialExperimentUtil.cleanupTask(stateObject);
 								} catch (Exception e) {
-									logger.warn(e.getMessage());
+									//logger.warn(e.getMessage());
 									e.printStackTrace();
 								}
 							}
@@ -132,7 +127,7 @@ public class SlideTrialExperiment implements Experiment {
 					try {
 						TrialExperimentUtil.cleanupTrial(stateObject);
 					} catch (Exception e) {
-						logger.warn(e.getMessage());
+						//logger.warn(e.getMessage());
 						e.printStackTrace();
 					}
 				}
@@ -148,11 +143,11 @@ public class SlideTrialExperiment implements Experiment {
 		}
 	}
 
-	public SlideTrialExperimentState getStateObject() {
+	public JulieTrialExperimentState getStateObject() {
 		return stateObject;
 	}
 
-	public void setStateObject(SlideTrialExperimentState stateObject) {
+	public void setStateObject(JulieTrialExperimentState stateObject) {
 		this.stateObject = stateObject;
 	}
 

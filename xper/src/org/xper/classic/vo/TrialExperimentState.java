@@ -46,7 +46,7 @@ public class TrialExperimentState {
 	@Dependency
 	boolean sleepWhileWait = true;
 	@Dependency
-	TimeUtil localTimeUtil;
+	protected TimeUtil localTimeUtil;
 	
 	AtomicBoolean pause = new AtomicBoolean(false);
 	/**

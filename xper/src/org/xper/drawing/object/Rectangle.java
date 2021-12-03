@@ -16,7 +16,7 @@ public class Rectangle implements Drawable {
 	@Dependency
 	double height;
 
-	static final int STEPS = 4;
+	protected static final int STEPS = 4;
 
 	ByteBuffer array = ByteBuffer.allocateDirect(STEPS * 3 * Float.SIZE / 8)
 			.order(ByteOrder.nativeOrder());
