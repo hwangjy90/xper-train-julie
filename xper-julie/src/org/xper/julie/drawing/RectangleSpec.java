@@ -6,7 +6,7 @@ public class RectangleSpec {
 	
 	double width;
 	double height;
-	boolean solid = true;
+	boolean solid;
 	
 	transient static XStream s;
 	
@@ -27,14 +27,11 @@ public class RectangleSpec {
 		RectangleSpec g = (RectangleSpec)s.fromXML(xml);
 		return g;
 	}
+
 	
-	public RectangleSpec() {}
 	
-	public RectangleSpec(RectangleSpec d) {
-		width = d.getWidth();
-		height = d.getHeight();
-	}
-		
+	
+	
 	public double getWidth() {
 		return width;
 	}
@@ -50,7 +47,7 @@ public class RectangleSpec {
 	}
 	
 	public boolean isSolid() {
-		return solid;
+		return solid = true;
 	}
 	public void setSolid(boolean solid) {
 		this.solid = solid;

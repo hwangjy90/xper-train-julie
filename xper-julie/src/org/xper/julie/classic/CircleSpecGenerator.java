@@ -8,8 +8,8 @@ public class CircleSpecGenerator implements StimSpecGenerator{
 	public static CircleSpec generate () {
 		CircleSpec circ = new CircleSpec();
 		circ.setRadius(Math.random()* (300-1) + 1); 
-		/* setRadius from CircleSpec */
-		/* use Math.random() * (max - min)) + min */
+		// setRadius from CircleSpec 
+		// use Math.random() * (max - min)) + min 
 		return circ;	
 	}	
 	

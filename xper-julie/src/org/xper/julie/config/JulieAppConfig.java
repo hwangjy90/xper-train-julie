@@ -50,7 +50,7 @@ public class JulieAppConfig {
 		gen.setGenerator(generator());
 		return gen;
 	}
-	/*
+	
 	@Bean
 	public RectangleSpecGenerator generator() {
 		RectangleSpecGenerator gen = new RectangleSpecGenerator();
@@ -68,7 +68,7 @@ public class JulieAppConfig {
 		return scene;
 	}
 	
-	*/
+	/*
 	@Bean
 	public CircleSpecGenerator generator() {
 		CircleSpecGenerator gen = new CircleSpecGenerator();
@@ -85,6 +85,8 @@ public class JulieAppConfig {
 		scene.setBlankScreen(new BlankScreen());
 		return scene;
 	}
+	*/
+	
 	@Bean
 	public ExperimentRunner experimentRunner () {
 		ExperimentRunner runner = new ExperimentRunner();

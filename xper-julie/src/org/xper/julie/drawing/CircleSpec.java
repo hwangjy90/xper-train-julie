@@ -28,6 +28,9 @@ public class CircleSpec {
 	}
 
 	
+	
+	
+	
 	public double getRadius() {
 		return radius;
 	}

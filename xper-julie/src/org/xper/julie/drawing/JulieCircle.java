@@ -10,7 +10,7 @@ public class JulieCircle extends Circle {
 	public void setSpec(String s) {
 		spec = CircleSpec.fromXml(s);
 		setRadius(spec.getRadius()); 
-		/* setRadius is from Circle.java; getRadius is from CircleSpec.java */
+		// setRadius is from Circle.java; getRadius is from CircleSpec.java 
 		setSolid(spec.isSolid());
 	}
 
