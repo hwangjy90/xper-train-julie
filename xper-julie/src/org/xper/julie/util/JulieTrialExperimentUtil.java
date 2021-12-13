@@ -98,13 +98,17 @@ public class JulieTrialExperimentUtil extends TrialExperimentUtil {
 		EyeController eyeController = stateObject.getEyeController();
 		TimeUtil timeUtil = stateObject.getLocalTimeUtil();
 		
+		System.out.println("JulieTrialExperiment::doSlide(): before showSlide() ");
 		// show current slide
 		drawingController.showSlide(currentTask, currentContext);
+		System.out.println("JulieTrialExperiment::doSlide(): after showSlide() ");
+
 		long slideOnLocalTime = timeUtil.currentTimeMicros();
 		currentContext.setCurrentSlideOnTime(slideOnLocalTime);
 		EventUtil.fireSlideOnEvent(i, slideOnLocalTime,
 				slideEventListeners);
-
+		
+		
 		// wait for current slide to finish
 		do {
 			if (!eyeController.isEyeIn()) {

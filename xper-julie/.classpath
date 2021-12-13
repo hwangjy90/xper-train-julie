@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
-	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="src">
+		<attributes>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="xper/lib/lwjgl/linux"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="src" path="app"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/xper"/>
 	<classpathentry kind="lib" path="/xper/lib/spring/com.springsource.javax.annotation-1.0.0.jar"/>
@@ -22,5 +26,9 @@
 	<classpathentry kind="lib" path="/xper/lib/lwjgl/lwjgl.jar"/>
 	<classpathentry kind="lib" path="/xper/lib/lwjgl/lwjgl-debug.jar"/>
 	<classpathentry kind="lib" path="/xper/lib/lwjgl/lzma.jar"/>
+	<classpathentry kind="lib" path="/xper/lib/jzy3d-api-0.9.1.jar"/>
+	<classpathentry kind="lib" path="/xper/lib/java3d/j3dcore.jar"/>
+	<classpathentry kind="lib" path="/xper/lib/java3d/j3dutils.jar"/>
+	<classpathentry kind="lib" path="/xper/lib/java3d/vecmath.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

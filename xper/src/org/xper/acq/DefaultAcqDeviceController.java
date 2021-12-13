@@ -70,7 +70,7 @@ public class DefaultAcqDeviceController implements AcqDeviceController {
 
 		startAcqThread();
 
-		System.out.println("Acq started: " + startTime);
+//		System.out.println("Acq started: " + startTime);
 	}
 
 	void processRawData() {
@@ -143,7 +143,7 @@ public class DefaultAcqDeviceController implements AcqDeviceController {
 		stopTime = localTimeUtil.currentTimeMicros();
 		dbUtil.writeEndAcqSession(startTime, stopTime);
 
-		System.out.println("Acq stopped: " + stopTime);
+//		System.out.println("Acq stopped: " + stopTime);
 	}
 
 	public AcqStreamingDevice getAcqDevice() {

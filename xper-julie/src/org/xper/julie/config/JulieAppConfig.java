@@ -3,6 +3,7 @@ package org.xper.julie.config;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.lwjgl.opengl.PixelFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.config.java.annotation.Bean;
 import org.springframework.config.java.annotation.Configuration;
@@ -12,20 +13,26 @@ import org.springframework.config.java.annotation.valuesource.SystemPropertiesVa
 import org.springframework.config.java.plugin.context.AnnotationDrivenConfig;
 import org.springframework.config.java.util.DefaultScopes;
 import org.xper.app.experiment.test.RandomGeneration;
+import org.xper.classic.MarkEveryStepTrialDrawingController;
+import org.xper.classic.TrialDrawingController;
 import org.xper.classic.TrialEventListener;
 import org.xper.config.AcqConfig;
 import org.xper.config.BaseConfig;
 import org.xper.config.ClassicConfig;
 import org.xper.drawing.TaskScene;
 import org.xper.drawing.object.BlankScreen;
+import org.xper.drawing.object.MonkeyWindow;
 import org.xper.experiment.Experiment;
 import org.xper.experiment.ExperimentRunner;
 import org.xper.juice.mock.NullDynamicJuice;
 import org.xper.julie.classic.CircleScene;
 import org.xper.julie.classic.CircleSpecGenerator;
+import org.xper.julie.classic.ImageScene;
 import org.xper.julie.classic.JulieJuiceController;
 import org.xper.julie.experiment.JulieTrialExperiment;
 import org.xper.julie.experiment.JulieTrialExperimentState;
+import org.xper.julie.experiment.test.PngRandomGeneration;
+import org.xper.julie.util.PngDbUtil;
 import org.xper.julie.classic.RectangleScene;
 import org.xper.julie.classic.RectangleSpecGenerator;
 
@@ -40,6 +47,56 @@ public class JulieAppConfig {
 	@Autowired BaseConfig baseConfig;
 	@Autowired AcqConfig acqConfig;
 	
+	@Bean
+	public PngDbUtil pngDbUtil() {
+		PngDbUtil util = new PngDbUtil();
+		util.setDataSource(baseConfig.dataSource());
+		return util;
+	}
+	
+	
+	@Bean
+	public PngRandomGeneration pngRandomGen() {
+		PngRandomGeneration gen = new PngRandomGeneration();
+		gen.setDbUtil(pngDbUtil());
+		gen.setGlobalTimeUtil(acqConfig.timeClient());
+		gen.setRenderer(classicConfig.experimentGLRenderer());
+//		gen.setGenerator(generator());
+		return gen;
+	}
+
+	
+	@Bean
+	public TaskScene pngTaskScene() {
+		ImageScene scene = new ImageScene();
+		scene.setRenderer(classicConfig.experimentGLRenderer());
+		scene.setFixation(classicConfig.experimentFixationPoint());
+		scene.setMarker(classicConfig.screenMarker());
+		scene.setBlankScreen(new BlankScreen());
+		return scene;
+	}
+	
+	
+	
+	@Bean
+	public TrialDrawingController drawingController() {
+		MarkEveryStepTrialDrawingController controller = new MarkEveryStepTrialDrawingController();
+		controller.setWindow(monkeyWindow());
+		controller.setTaskScene(pngTaskScene());
+		controller.setFixationOnWithStimuli(true); //classicConfig.xperFixationOnWithStimuli()
+		return controller;
+	}
+	
+	
+	@Bean
+	public MonkeyWindow monkeyWindow() {
+		MonkeyWindow win = new MonkeyWindow();
+		win.setFullscreen(classicConfig.monkeyWindowFullScreen);
+		win.setPixelFormat(new PixelFormat(0, 8, 1, 4));
+		return win;
+	}
+
+	
 	
 	@Bean
 	public RandomGeneration randomGen () {
@@ -50,6 +107,7 @@ public class JulieAppConfig {
 		gen.setGenerator(generator());
 		return gen;
 	}
+	
 	
 	@Bean
 	public RectangleSpecGenerator generator() {
@@ -95,6 +153,7 @@ public class JulieAppConfig {
 		return runner;
 	}
 	
+	
 	@Bean
 	public Experiment experiment () {
 		JulieTrialExperiment xper = new JulieTrialExperiment();
@@ -131,6 +190,7 @@ public class JulieAppConfig {
 		return state;
 	}
 	
+	
 	@Bean (scope = DefaultScopes.PROTOTYPE)
 	public List<TrialEventListener> trialEventListeners () {
 		List<TrialEventListener> trialEventListener = new LinkedList<TrialEventListener>();
@@ -149,6 +209,7 @@ public class JulieAppConfig {
 		return trialEventListener;
 	}
 	
+	
 	@Bean
 	public TrialEventListener juiceController() {
 		JulieJuiceController controller = new JulieJuiceController();
@@ -160,14 +221,15 @@ public class JulieAppConfig {
 		return controller;
 	}
 	
+	
 	@Bean(scope = DefaultScopes.PROTOTYPE)
 	public String xperPrintMsg() {
 		return baseConfig.systemVariableContainer().get("xper_print_msg", 0);
 	}
 	
+	
 	@Bean(scope = DefaultScopes.PROTOTYPE)
 	public String xperPrintSecondMsg() {
 		return baseConfig.systemVariableContainer().get("xper_print_second_msg", 0);
 	}
-
 }
