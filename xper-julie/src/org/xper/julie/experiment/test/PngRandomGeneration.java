@@ -13,6 +13,7 @@ import java.util.List;
 //import java.util.SortedMap;
 //import javax.vecmath.Point3d;
 //import java.lang.Thread;
+import java.util.Random;
 
 //import org.lwjgl.util.Renderable;
 import org.xper.Dependency;
@@ -60,28 +61,24 @@ public class PngRandomGeneration {
 	
 	
 	public void generate() {
-		int NumImages = 8;
-
-		ImageSpec im1 = new ImageSpec();
-		
-		String basepath = "/home/justin/choiceImages/img";
+		int NumImages = 16 + 1;
+		String basePath = "../../images/";
+		String baseName = "img";
 		String ext = ".png";
 		
 		System.out.print("JK 833862 PngRandomGeneration generate() ");
 		long genId = 1;
+		ImageSpec im1 = new ImageSpec();
+		Random rnd = new Random();
+	
 		try {
 			genId = dbUtil.readReadyGenerationInfo().getGenId() + 1;
 		} catch (VariableNotFoundException e) {
 			dbUtil.writeReadyGenerationInfo(genId, 0);
 		}
 		for (int i = 0; i < taskCount; i++) {
-//			if (i % 10 == 0) {
-//				System.out.print(".");
-//			}
-			im1.setFilename(basepath + Integer.toString((int)(Math.round(Math.random() * NumImages))) + ext);
-		
-			System.out.println(im1.toXml());
-			
+			im1.setFilename(basePath + baseName + Integer.toString(rnd.nextInt(NumImages)) + ext);
+			System.out.println("JK 837 " + im1.toXml());
 			long taskId = System.currentTimeMillis() * 1000L;
      		dbUtil.writeStimSpec(taskId, im1.toXml());
 			dbUtil.writeTaskToDo(taskId, taskId, -1, genId);
@@ -89,8 +86,6 @@ public class PngRandomGeneration {
 		dbUtil.updateReadyGenerationInfo(genId, taskCount);
 		System.out.println("done.");
 	}
-
-
 
 //	
 //	private void writeExptStart() {

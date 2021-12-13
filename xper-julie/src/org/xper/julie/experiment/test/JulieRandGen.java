@@ -10,7 +10,7 @@ public class JulieRandGen {
 				FileUtil.loadConfigClass("experiment.config_class"));
 
 		PngRandomGeneration gen = context.getBean(PngRandomGeneration.class);
-		gen.setTaskCount(20);
+		gen.setTaskCount(100);
 		gen.generate();
 	}
 }

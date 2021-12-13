@@ -35,7 +35,7 @@ public class TrialSyncController implements TrialEventListener {
 	
 	public void trialInit(long timestamp, TrialContext context) {
 		trialSync.startTrialSyncPulse();
-		System.out.println("Trial syncing started (trialInit) @ " + new Timestamp(timestamp/1000).toString());
+//		System.out.println("Trial syncing started (trialInit) @ " + new Timestamp(timestamp/1000).toString());
 	}
 
 	public void trialStart(long timestamp, TrialContext context) {
@@ -43,7 +43,7 @@ public class TrialSyncController implements TrialEventListener {
 
 	public void trialStop(long timestamp, TrialContext context) {
 		trialSync.stopTrialSyncPulse();;
-		System.out.println("Trial syncing stopped (trialStop) @ " + new Timestamp(timestamp/1000).toString());
+//		System.out.println("Trial syncing stopped (trialStop) @ " + new Timestamp(timestamp/1000).toString());
 	}
 
 	public TrialSync getTrialSync() {

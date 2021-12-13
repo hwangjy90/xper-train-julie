@@ -2,50 +2,14 @@ package org.xper.julie.classic;
 
 import org.xper.drawing.AbstractTaskScene;
 import org.xper.drawing.Context;
+import org.xper.drawing.Drawable;
 import org.xper.experiment.ExperimentTask;
-
-//import java.util.ArrayList;
-//import java.util.HashMap;
-//import java.util.List;
-//import java.util.Map;
-
+import org.lwjgl.opengl.GL11;
 import org.xper.Dependency;
 import org.xper.classic.vo.TrialContext;
-//import org.xper.drawing.AbstractTaskScene;
-//import org.xper.drawing.Context;
-//import org.xper.experiment.ExperimentTask;
-
 import org.xper.julie.drawing.Image;
 import org.xper.julie.util.PngDbUtil;
-
-//import org.lwjgl.opengl.GL11;
 import org.xper.julie.drawing.ImageSpec;
-//import org.xper.julie.expt.generate.PngGAParams;
-
-
-//
-//public class ImageScene extends AbstractTaskScene{
-//	
-//	JulieCircle obj = new JulieCircle();
-//	
-//
-//	public void initGL(int w, int h) {
-//		super.initGL(w, h);
-//	}
-//	
-//	public void setTask(ExperimentTask task) {
-//		obj.setSpec(task.getStimSpec());
-//	}
-//
-//	public void drawStimulus(Context context) {
-//		obj.draw(context);
-//	}
-//
-//
-//}
-
-
-
 
 public class ImageScene extends AbstractTaskScene {
 	
@@ -61,19 +25,47 @@ public class ImageScene extends AbstractTaskScene {
 	
 	public void initGL(int w, int h) {
 		super.initGL(w, h);        
+		System.out.println("JK 5311 ImageScene::initGL() " + w + ", " + h);
 	}
 	
 	public void setTask(ExperimentTask task) {
 //		if(task == null) {
-//			System.out.println("PgnExptScene:setTask() ");
+			System.out.println("ImageScene:setTask() ");
 //		}
 	}
 
 	public void drawStimulus(Context context) {
-		System.out.println("JK 0239 PngExptScene:drawStimulus()");
+		System.out.println("JK 0239 ImageScene:drawStimulus()");
 		image.draw(context);
 	}
 
+	public void drawTask(Context context, final boolean fixationOn) {
+		System.out.println("JK 54523 ImageScene::drawTask()");
+		// clear the whole screen before define view ports in renderer
+		blankScreen.draw(null);
+		renderer.draw(new Drawable() {
+			public void draw(Context context) {
+				if (useStencil) {
+					// 0 will pass for stimulus region
+					GL11.glStencilFunc(GL11.GL_EQUAL, 0, 1);
+				}
+				drawStimulus(context);
+				if (useStencil) {
+					// 1 will pass for fixation and marker regions
+					GL11.glStencilFunc(GL11.GL_EQUAL, 1, 1);
+				}
+				
+				if (fixationOn) {
+					 fixation.draw(context);
+				}
+				marker.draw(context);
+				if (useStencil) {
+					// 0 will pass for stimulus region
+					GL11.glStencilFunc(GL11.GL_EQUAL, 0, 1);
+				}
+			}}, context);
+	}
+	
 	public PngDbUtil getDbUtil() {
 		return dbUtil;
 	}
@@ -94,7 +86,7 @@ public class ImageScene extends AbstractTaskScene {
 	public void trialStop(TrialContext context) {
 //		images.cleanUp();
 //		blankImage.setFrameNum(0);
-		System.out.println("JK 0739 PngExptScene:trialStop\n\n" );
+		System.out.println("JK 0739 ImageScene:trialStop\n\n" );
 //		blankImage.draw(context);
 	}
 	

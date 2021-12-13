@@ -18,8 +18,8 @@ public class JulieJuiceController extends JuiceController {
 	}
 
 	public void fixationPointOn(long timestamp, TrialContext context) {
-		juice.deliver();
-		System.out.println("Juice delivered when fixation ON @ " + new Timestamp(timestamp/1000).toString());
+//		juice.deliver();
+//		System.out.println("Juice delivered when fixation ON @ " + new Timestamp(timestamp/1000).toString());
 	}
 
 	public void fixationSucceed(long timestamp, TrialContext context) {

@@ -24,8 +24,6 @@
 		<map from="${dist.home}${file.separator}" to="../" />
 	</pathconvert>
 	
-	<echo message="Manifest classpath is ${manifest.classpath}" />
-	
 	
 	<target name="prepare">
 		<mkdir dir="${build.home}" />
@@ -39,17 +37,17 @@
 	</target>
 
 	<target name="compile" depends="prepare">
-		<javac srcdir="src" destdir="${build.home}"> 
+		<javac srcdir="src" destdir="${build.home}" includeantruntime="false"> 
 			<classpath refid="classpath" />
 		</javac>
-		<javac srcdir="app" destdir="${build.home}"> 
+		<javac srcdir="app" destdir="${build.home}" includeantruntime="false"> 
 			<classpath refid="classpath" />
 		</javac>
 	</target>
 
 
 	<target name="dist" depends="compile">
-		<jar jarfile="${xper-julie.home}/xper-julie.jar" basedir="${build.home}">
+		<jar jarfile="${xper-julie.home}/xper-julie-randgen.jar" basedir="${build.home}">
 		</jar>
 		
 		<jar jarfile="${xper-julie.home}/ga_randgen.jar">
@@ -57,27 +55,27 @@
 				<include name="org/xper/xper-julie/app/ga/RandGen.class" />
 			</fileset>
 			<manifest>
-				<attribute name="Main-Class" value="org.xper.xper-julie.app.ga.RandGen" />
+				<attribute name="Main-Class" value="org.xper.xper-julie.app.RandGen" />
 				<attribute name="Class-Path" value=". ${manifest.classpath} " />
 			</manifest>
 		</jar>
 		
-		<jar jarfile="${xper-julie.home}/ga_experiment.jar">
+		<jar jarfile="${xper-julie.home}/xper-julie-experiment.jar">
 			<fileset dir="${build.home}">
-				<include name="org/xper/xper-julie/app/ga/Experiment.class" />
+				<include name="org/xper/julie/app/Experiment.class" />
 			</fileset>
 			<manifest>
-				<attribute name="Main-Class" value="org.xper.xper-julie.app.ga.Experiment" />
+				<attribute name="Main-Class" value="org.xper.xper-julie.app.Experiment" />
 				<attribute name="Class-Path" value=". ${manifest.classpath}" />
 			</manifest>
 		</jar>
 
-		<jar jarfile="${xper-julie.home}/ga_console.jar">
+		<jar jarfile="${xper-julie.home}/xper-julie-console.jar">
 			<fileset dir="${build.home}">
-				<include name="org/xper/xper-julie/app/ga/Console.class" />
+				<include name="org/xper/julie/app/Console.class" />
 			</fileset>
 			<manifest>
-				<attribute name="Main-Class" value="org.xper.xper-julie.app.ga.Console" />
+				<attribute name="Main-Class" value="org.xper.julie.app.Console" />
 				<attribute name="Class-Path" value=". ${manifest.classpath}" />
 			</manifest>
 		</jar>

@@ -40,7 +40,7 @@ public class Image implements Drawable {
 			BufferedImage img = ImageIO.read(imageFile);
 			imgWidth = img.getWidth();
 			imgHeight = img.getHeight();
-			System.out.println("JK 12413 Image loaded image : " + imgWidth + ", " + imgHeight);
+//			System.out.println("JK 12413 Image loaded image : " + imgWidth + ", " + imgHeight);
 			byte[] src = ((DataBufferByte)img.getRaster().getDataBuffer()).getData();
 			bgr2rgb(src);
 			pixels = (ByteBuffer)BufferUtils.createByteBuffer(src.length).put(src, 0x00000000, src.length).flip();
@@ -48,7 +48,8 @@ public class Image implements Drawable {
 
 			return 0; 
 		} catch(IOException e) {
-			e.printStackTrace();
+//			e.printStackTrace();
+			System.out.println("Image::loadTexture(), FILE NOT FOUND : " + pathname);
 			throw new RuntimeException(e);
 		}
 	}
@@ -87,7 +88,7 @@ public class Image implements Drawable {
 		float height = imgHeight;		
 		float yOffset = -height / 2;
 		float xOffset = -width / 2; 
-		System.out.println("JK 26193 draw	");
+//		System.out.println("JK 26193 draw	");
 		
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, textureIds.get(textureIndex));		
@@ -131,11 +132,11 @@ public class Image implements Drawable {
 	}	
 
 	public static void testImage(){
-		String resourcePath = "/home/justin/choiceImages/"; 
+		String resourcePath = "../../images/"; 
 		String ext = ".png";
 		String baseFilename = "img";		
 		String testImageName = resourcePath + baseFilename + ext;
-		int numImages = 6;    
+		int numImages = 16;    
 		DrawingManager testWindow = new DrawingManager(1200, 1920);
 		List<Image> images = new ArrayList<Image>();
 		testWindow.setDisplayDur(1540);
