@@ -37,5 +37,6 @@
 	<classpathentry kind="lib" path="/xper-example/class"/>
 	<classpathentry kind="lib" path="lib/jaxen-full.jar"/>
 	<classpathentry kind="lib" path="lib/saxpath.jar"/>
+	<classpathentry kind="lib" path="lib/jzy3d-api-0.9.1.jar"/>
 	<classpathentry kind="output" path="class"/>
 </classpath>

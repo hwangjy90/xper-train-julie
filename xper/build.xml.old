@@ -33,19 +33,13 @@
 		<copy todir="${build.home}">
 			<fileset dir="src" excludes="**/*.java" />
 		</copy>
-		
-		<!-- JK 26 June 2018 restore the properties files  after cleaning -->
-		<copy todir="${build.home}">
-			<fileset dir="${basedir}/app" includes="*.properties" />
-		</copy>
-			
 	</target>
 
 	<target name="compile" depends="prepare">
-		<javac srcdir="src" destdir="${build.home}" includeantruntime="false">
+		<javac srcdir="src" destdir="${build.home}" target="1.8" source="1.8" bootclasspath='/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar' includeantruntime="false">
 			<classpath refid="classpath" />
 		</javac>
-		<javac srcdir="app" destdir="${build.home}" includeantruntime="false">
+		<javac srcdir="app" destdir="${build.home}" target="1.8" source="1.8" bootclasspath='/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar' includeantruntime="false">
 			<classpath refid="classpath" />
 		</javac>
 	</target>

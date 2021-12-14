@@ -1,0 +1,83 @@
+<project name="xper-train-julie" default="dist" basedir=".">
+	<property name="build.home" location="${basedir}/class" />
+	<property name="xper.home" location="${basedir}/../xper" />
+	<property name="native.home" location="${basedir}/../xper-native" />
+	<property name="dist.home" location="${basedir}/../dist" />
+	<property name="xper-julie.home" location="${dist.home}/xper-julie" />
+	
+	<target name="clean">
+		<delete dir="${build.home}" />
+		<delete dir="${xper-julie}" />
+	</target>
+
+	<path id="classpath">
+		<fileset dir="${xper.home}/lib">
+			<include name="**/*.jar" />
+		</fileset>
+		<fileset file="${dist.home}/xper.jar" />
+	</path>
+	
+	<pathconvert property="manifest.classpath" dirsep="/" pathsep=" ">
+		<path refid="classpath">
+		</path>
+		<map from="${xper.home}${file.separator}lib" to="../lib" />
+		<map from="${dist.home}${file.separator}" to="../" />
+	</pathconvert>
+	
+	
+	<target name="prepare">
+		<mkdir dir="${build.home}" />
+		<mkdir dir="${dist.home}" />
+		<mkdir dir="${dist.home}/xper-julie" />
+		
+		<copy todir="${dist.home}" includeEmptyDirs="false">
+			<fileset dir="src" excludes="**/*.java" />
+			<fileset dir="app" excludes="**/*.java" />
+		</copy>
+	</target>
+
+	<target name="compile" depends="prepare">
+		<javac srcdir="src" destdir="${build.home}" includeantruntime="false"> 
+			<classpath refid="classpath" />
+		</javac>
+		<javac srcdir="app" destdir="${build.home}" includeantruntime="false"> 
+			<classpath refid="classpath" />
+		</javac>
+	</target>
+
+
+	<target name="dist" depends="compile">
+		<jar jarfile="${xper-julie.home}/xper-julie-randgen.jar" basedir="${build.home}">
+		</jar>
+		
+		<jar jarfile="${xper-julie.home}/ga_randgen.jar">
+			<fileset dir="${build.home}">
+				<include name="org/xper/xper-julie/app/ga/RandGen.class" />
+			</fileset>
+			<manifest>
+				<attribute name="Main-Class" value="org.xper.xper-julie.app.RandGen" />
+				<attribute name="Class-Path" value=". ${manifest.classpath} " />
+			</manifest>
+		</jar>
+		
+		<jar jarfile="${xper-julie.home}/xper-julie-experiment.jar">
+			<fileset dir="${build.home}">
+				<include name="org/xper/julie/app/Experiment.class" />
+			</fileset>
+			<manifest>
+				<attribute name="Main-Class" value="org.xper.xper-julie.app.Experiment" />
+				<attribute name="Class-Path" value=". ${manifest.classpath}" />
+			</manifest>
+		</jar>
+
+		<jar jarfile="${xper-julie.home}/xper-julie-console.jar">
+			<fileset dir="${build.home}">
+				<include name="org/xper/julie/app/Console.class" />
+			</fileset>
+			<manifest>
+				<attribute name="Main-Class" value="org.xper.julie.app.Console" />
+				<attribute name="Class-Path" value=". ${manifest.classpath}" />
+			</manifest>
+		</jar>
+	</target>
+</project>
